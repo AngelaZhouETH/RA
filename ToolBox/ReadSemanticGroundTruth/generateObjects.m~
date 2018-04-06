@@ -7,6 +7,7 @@
 function [ gridCatLabel, gridInstLabel ] = generateObjects(objcategory, nodes, room, suncgDataPath, voxUnit, gridPtsWorld, gridCatLabel, gridInstLabel, objectMap, scaleMap, minObjs, capacity, wallID, enabledGPU)
 
     fileID = fopen('../../MZ_logfile.txt','a');
+    fprintf(fileID, 'testing\n');
     % If there are objects in room
     if isfield(room, 'nodeIndices')
         fprintf('Reading objects');

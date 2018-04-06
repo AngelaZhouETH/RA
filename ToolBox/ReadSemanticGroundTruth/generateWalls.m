@@ -1,6 +1,6 @@
 % Reads and reconstructs the walls of a room
 
-function [ gridPtsLabel ] = generateWalls( path, id, sizeR, voxUnit, voxOriginWorld, gridPtsWorld, gridPtsWorldX, gridPtsWorldZ, gridPtsLabel)
+function [ gridCatLabel, gridInstLabel ] = generateWalls( path, id, sizeR, voxUnit, voxOriginWorld, gridPtsWorld, gridPtsWorldX, gridPtsWorldZ, gridCatLabel, gridInstLabel)
 
    if(exist (path)) 
 
@@ -21,11 +21,11 @@ function [ gridPtsLabel ] = generateWalls( path, id, sizeR, voxUnit, voxOriginWo
         end
 
         gridPtsObjWorldInd = inRoom(:)' & ...
-                            (gridPtsWorld(2,:)<voxOriginWorld(2)+size(gridPtsLabel, 2)-2*voxUnit/2) & ...
+                            (gridPtsWorld(2,:)<voxOriginWorld(2)+size(gridCatLabel, 2)-2*voxUnit/2) & ...
                             (gridPtsWorld(2,:)>voxOriginWorld(2)+0-2*voxUnit/2);
 
-        gridPtsLabel(gridPtsObjWorldInd) = id;
-        
+        gridCatLabel(gridPtsObjWorldInd) = id;
+        gridInstLabel(gridPtsObjWorldInd) = id;
    end
 
 end

@@ -1,4 +1,4 @@
-function [ gridPtsWorldX,gridPtsWorldY,gridPtsWorldZ,gridPtsWorld,gridPtsLabel, inRoom] = constructGrid( voxOriginWorld, voxUnit, voxSize )
+function [ gridPtsWorldX,gridPtsWorldY,gridPtsWorldZ,gridPtsWorld,gridCatLabel, gridInstLabel, inRoom] = constructGrid( voxOriginWorld, voxUnit, voxSize )
 
 
         [gridPtsWorldX,gridPtsWorldY,gridPtsWorldZ] = ndgrid(voxOriginWorld(1):voxUnit:(voxOriginWorld(1)+(voxSize(1)-voxUnit)), ...
@@ -8,7 +8,8 @@ function [ gridPtsWorldX,gridPtsWorldY,gridPtsWorldZ,gridPtsWorld,gridPtsLabel, 
 
         % Voxel grid points and lables per voxel
         gridPtsWorld = [gridPtsWorldX(:),gridPtsWorldY(:),gridPtsWorldZ(:)]';
-        gridPtsLabel = zeros(1,size(gridPtsWorld,2));
+        gridCatLabel = zeros(1,size(gridPtsWorld,2));
+        gridInstLabel = zeros(1,size(gridPtsWorld,2));
 
 
         % Structure to store polygons lie in grid

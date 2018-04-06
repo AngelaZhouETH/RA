@@ -133,7 +133,7 @@ void mexFunction(int nlhs, mxArray *plhs[],
     /* Create a 3d mesh for visualization */
     label empty_label = {"sky", 0, 0, 0};
     
-    vector<label> labels(37);
+    vector<label> labels(numClasses);
     labels[0] = empty_label;
     
     ifstream labelStream;
@@ -144,8 +144,9 @@ void mexFunction(int nlhs, mxArray *plhs[],
 
     string labelName;
     int labelIdx = 1;
-    while (labelStream >> labelName)
+    while (labelIdx < numClasses)
     {
+        labelStream >> labelName;
         label newLabel;
         newLabel.name = labelName;
 
@@ -158,6 +159,7 @@ void mexFunction(int nlhs, mxArray *plhs[],
         newLabel.b = val;
 
         labels[labelIdx] = newLabel;
+        cout << labelName << endl;
         ++labelIdx;
     }
 
