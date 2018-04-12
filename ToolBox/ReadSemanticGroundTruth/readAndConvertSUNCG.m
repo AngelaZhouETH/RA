@@ -81,8 +81,6 @@ bboxold = [];
 resultFolder = [];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-fileID = fopen('../../MZ_logfile.txt','a');
-fprintf(fileID, 'testing\n');
 
 %% Read files
 
@@ -120,13 +118,8 @@ for sceneIdx = 1:numScenes
                 tic;
                 %%%%
 
-                room    = nodes{node_idx};
-                numInstances = length(room.nodeIndices)+4;
-                if numInstances > 86
-                    fprintf(fileID, 'error: more than 85 object instances\n');
-                    continue;
-                end
-                bbox   = nodes{node_idx}.bbox;
+                room = nodes{node_idx};
+                bbox = nodes{node_idx}.bbox;
                 sceneOrigin = bbox.min;
 
                 % Check if the previous room is included in the next room
@@ -147,6 +140,7 @@ for sceneIdx = 1:numScenes
                     fprintf('Creating voxel grid\n');
                     [gridPtsWorldX, gridPtsWorldY, gridPtsWorldZ, gridPtsWorld, gridCatLabel, gridInstLabel, inRoom] = ... 
                         constructGrid(voxOriginWorld, voxUnit, voxSize);
+                    classInstCount = zeros(1, numClasses-1);
 
                 else
                     if(~isempty(resultFolder))
@@ -172,35 +166,35 @@ for sceneIdx = 1:numScenes
                 %% Ceiling grid in the room
 
                 fprintf('Reading ceiling\n');
-                ceilID
                 [gridCatLabel, gridInstLabel] = generateCeilingFloor( ...
                                 ceilPath, ceilID, size(inRoom), voxUnit, ...
                                 voxOriginWorld, gridPtsWorld, ...
                                 gridPtsWorldX, gridPtsWorldZ, ...
                                 gridCatLabel, gridInstLabel ...
                                 );
+                classInstCount(ceilID) = 1;
 
                 %% Floor grid in the room
                 % exactly like ceiling part
                 fprintf('Reading floor\n');
-                floorID
                 [gridCatLabel, gridInstLabel] = generateCeilingFloor(...
                                 floorPath, floorID, ...
                                 size(inRoom), voxUnit, voxOriginWorld, ...
                                 gridPtsWorld, gridPtsWorldX, gridPtsWorldZ, ...
                                 gridCatLabel, gridInstLabel ...
                                 );
+                classInstCount(floorID) = 1;
 
                 %% Walls grid in the room
                 % exactly like ceiling part
                 fprintf('Reading walls\n');
-                wallID
                 [gridCatLabel, gridInstLabel]  = generateWalls( ...
                                 wallPath, wallID, size(inRoom), voxUnit, ...
                                 voxOriginWorld, gridPtsWorld, ...
                                 gridPtsWorldX, gridPtsWorldZ, ...
                                 gridCatLabel, gridInstLabel ...
                                 );
+                classInstCount(wallID) = 1;
 
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%
                 times(roomCounter,2) = toc;
@@ -208,7 +202,7 @@ for sceneIdx = 1:numScenes
 
                 %% Object Read;
                 fprintf('Reading objects');
-                [gridCatLabel, gridInstLabel] = generateObjects(objcategory, nodes, room, suncgDataPath, voxUnit, gridPtsWorld, gridCatLabel, gridInstLabel, objectMap, scaleMap, minObjs, capacity, wallID, enabledGPU);
+                [gridCatLabel, gridInstLabel] = generateObjects(objcategory, nodes, room, suncgDataPath, voxUnit, gridPtsWorld, gridCatLabel, gridInstLabel, objectMap, scaleMap, minObjs, capacity, wallID, enabledGPU, classInstCount);
 
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%
                 times(roomCounter,3) = toc;
@@ -222,18 +216,12 @@ for sceneIdx = 1:numScenes
                 resultFolder = fullfile(outputFolder, sceneID, ...
                                         strcat('room','_',room.modelId));
 
-                res_cat = fullfile(resultFolder, 'categories');
-                res_inst = fullfile(resultFolder, 'instances');
-                if(~exist(res_cat))
-                    mkdir(res_cat);
-                end
-                if(~exist(res_inst))
-                    mkdir(res_inst);
+                if(~exist(resultFolder))
+                    mkdir(resultFolder);
                 end
 
                 % Create reconstruction files
-                convertGrid(gridCatLabel, [numClasses, gridSize], sceneOrigin, 'labels_cat.txt', res_cat);
-                convertGrid(gridInstLabel, [numInstances, gridSize], sceneOrigin, 'labels_inst.txt', res_inst);
+                convertGrid(gridCatLabel, gridInstLabel, [numClasses, gridSize], sceneOrigin, 'labels.txt', resultFolder);
 
                 % Save configuration (in case)
                 configfile = fullfile(outputFolder, sceneID, 'config.mat');
@@ -280,7 +268,6 @@ for sceneIdx = 1:numScenes
 
 end
 
-fclose(fileID);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Print Time Statistics

@@ -28,7 +28,7 @@ function [ gridCatLabel, gridInstLabel ] = generateCeilingFloor( path, id, sizeR
         gridPtsObjWorldInd = inRoom(:)' & (abs(gridPtsWorld(2,:)-voxOriginWorld(2)-posZ) <= 2*voxUnit/2);
         % label all the ceiling points in the scene
         gridCatLabel(gridPtsObjWorldInd) = id;
-        gridInstLabel(gridPtsObjWorldInd) = id;
+        gridInstLabel(gridPtsObjWorldInd) = 1;
         
     end
 

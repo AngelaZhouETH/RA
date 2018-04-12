@@ -23,6 +23,7 @@ load(fullfile(suncgToolboxPath, 'suncgObjcategory.mat'));
 % mex -I"../Eigen/eigen" -I"/usr/local/opt/boost/include/" -I"/opt/X11/include/" -outdir ToolBox/MyMexFiles -c ToolBox/MyMexFiles/volumetricFusionTools.cpp
 mex -I"../Eigen/eigen" -I"/usr/local/opt/boost/include/" -L"/usr/X11/lib/" -lpthread -lX11 ToolBox/MyMexFiles/ioTools.o ToolBox/MyMexFiles/volumetricFusionTools.o ToolBox/MyMexFiles/convertGrid.cpp
 
+exit
 suncgDataPath = rawDataPath;
 
 %% Result directory
@@ -81,7 +82,8 @@ bboxold = [];
 resultFolder = [];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+fileID = fopen('../../MZ_logfile.txt','a');
+fprintf(fileID, 'testing\n');
 
 %% Read files
 
@@ -107,7 +109,7 @@ for sceneIdx = 1:numScenes
         % Rooms per floor
         nodes  = house.levels{level_idx}.nodes;
 
-	roomCounter = 1;
+        roomCounter = 1;
 
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         % For every room
@@ -119,12 +121,13 @@ for sceneIdx = 1:numScenes
                 tic;
                 %%%%
 
-                room    = nodes{node_idx};
-                numInstances = length(room.nodeIndices)+4;
-                fileID = fopen('../../MZ_logfile.txt','a');
-                fprintf(fileID, 'testing\n');
-                if numInstances > 
-                bbox   = nodes{node_idx}.bbox;
+                room = nodes{node_idx};
+%                 numInstances = length(room.nodeIndices)+4;
+%                 if numInstances > 86
+%                     fprintf(fileID, 'error: more than 85 object instances\n');
+%                     continue;
+%                 end
+                bbox = nodes{node_idx}.bbox;
                 sceneOrigin = bbox.min;
 
                 % Check if the previous room is included in the next room
@@ -145,6 +148,7 @@ for sceneIdx = 1:numScenes
                     fprintf('Creating voxel grid\n');
                     [gridPtsWorldX, gridPtsWorldY, gridPtsWorldZ, gridPtsWorld, gridCatLabel, gridInstLabel, inRoom] = ... 
                         constructGrid(voxOriginWorld, voxUnit, voxSize);
+                    classInstCount = zeros(0, 36);
 
                 else
                     if(~isempty(resultFolder))
@@ -170,7 +174,6 @@ for sceneIdx = 1:numScenes
                 %% Ceiling grid in the room
 
                 fprintf('Reading ceiling\n');
-                ceilID
                 [gridCatLabel, gridInstLabel] = generateCeilingFloor( ...
                                 ceilPath, ceilID, size(inRoom), voxUnit, ...
                                 voxOriginWorld, gridPtsWorld, ...
@@ -181,7 +184,6 @@ for sceneIdx = 1:numScenes
                 %% Floor grid in the room
                 % exactly like ceiling part
                 fprintf('Reading floor\n');
-                floorID
                 [gridCatLabel, gridInstLabel] = generateCeilingFloor(...
                                 floorPath, floorID, ...
                                 size(inRoom), voxUnit, voxOriginWorld, ...
@@ -192,7 +194,6 @@ for sceneIdx = 1:numScenes
                 %% Walls grid in the room
                 % exactly like ceiling part
                 fprintf('Reading walls\n');
-                wallID
                 [gridCatLabel, gridInstLabel]  = generateWalls( ...
                                 wallPath, wallID, size(inRoom), voxUnit, ...
                                 voxOriginWorld, gridPtsWorld, ...
@@ -278,6 +279,7 @@ for sceneIdx = 1:numScenes
 
 end
 
+fclose(fileID);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Print Time Statistics

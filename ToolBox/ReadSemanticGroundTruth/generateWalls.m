@@ -25,7 +25,7 @@ function [ gridCatLabel, gridInstLabel ] = generateWalls( path, id, sizeR, voxUn
                             (gridPtsWorld(2,:)>voxOriginWorld(2)+0-2*voxUnit/2);
 
         gridCatLabel(gridPtsObjWorldInd) = id;
-        gridInstLabel(gridPtsObjWorldInd) = id;
+        gridInstLabel(gridPtsObjWorldInd) = 1;
    end
 
 end

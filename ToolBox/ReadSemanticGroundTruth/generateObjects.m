@@ -4,19 +4,14 @@
 % Applies segmentation on grid points of object
 % Updates the label grid  
 
-function [ gridCatLabel, gridInstLabel ] = generateObjects(objcategory, nodes, room, suncgDataPath, voxUnit, gridPtsWorld, gridCatLabel, gridInstLabel, objectMap, scaleMap, minObjs, capacity, wallID, enabledGPU)
+function [ gridCatLabel, gridInstLabel ] = generateObjects(objcategory, nodes, room, suncgDataPath, voxUnit, gridPtsWorld, gridCatLabel, gridInstLabel, objectMap, scaleMap, minObjs, capacity, wallID, enabledGPU, classInstCount)
 
-    fileID = fopen('../../MZ_logfile.txt','a');
     % If there are objects in room
     if isfield(room, 'nodeIndices')
-        fprintf('Reading objects');
-
         obj_in_room = room.nodeIndices;
-        instId = 1;
 
         % For every object
         for objId = obj_in_room
-            objId
             object_struct = nodes{objId+1};
 
             if isfield(object_struct, 'modelId')
@@ -76,19 +71,14 @@ function [ gridCatLabel, gridInstLabel ] = generateObjects(objcategory, nodes, r
                 objOccInd = sqrt(dists) <= sqrt(3)/2*scale;
                 gridPtsObjWorldLinearIdx = find(gridPtsObjWorldInd);
                 gridCatLabel(gridPtsObjWorldLinearIdx(objOccInd)) = classRootId;
-                gridInstLabel(gridPtsObjWorldLinearIdx(objOccInd)) = instId + 3;
-                instId = instId + 1;
+                classInstCount(classRootId) = classInstCount(classRootId) + 1;
+                gridInstLabel(gridPtsObjWorldLinearIdx(objOccInd)) = classInstCount(classRootId);
 
+                classRootId
+                classInstCount(classRootId)
             end
         end
 
-        instId = instId -1;
-        fprintf('\n#nodes: %d\n', length(obj_in_room));
-        fprintf('last instId: %d\n', instId);
-        if instId ~= length(obj_in_room)
-            fprintf(fileID, 'error: instId ~= length(obj_in_room)\n');
-        end
-        fclose(fileID);
         fprintf('\n');
     end
 

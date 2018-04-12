@@ -36,62 +36,63 @@ void mexFunction(int nlhs, mxArray *plhs[],
 {
     /** CHECK INPUT VALIDITY **/
     /* Check for proper number of arguments */
-    if(nrhs != 5) {
-        mexErrMsgIdAndTxt("MyMexFiles:convertGrid:nrhs", "5 input required.");
-    }
+    // if(nrhs != 6) {
+    //     mexErrMsgIdAndTxt("MyMexFiles:convertGrid:nrhs", "6 input required.");
+    // }
     
-    if(nlhs > 0) {
-        mexErrMsgIdAndTxt("MyMexFiles:convertGrid:nlhs", "No output required.");
-    }
+    // if(nlhs > 0) {
+    //     mexErrMsgIdAndTxt("MyMexFiles:convertGrid:nlhs", "No output required.");
+    // }
         
-    /* Check if the input is of proper type */
-    if(!mxIsDouble(prhs[0]) || mxIsComplex(prhs[0])) {
-        mexErrMsgIdAndTxt("MyMexFiles:convertGrid:notDouble", 
-                            "Input grid values must be type double.");
-    }
+    // /* Check if the input is of proper type */
+    // if(!mxIsDouble(prhs[0]) || mxIsComplex(prhs[0])) {
+    //     mexErrMsgIdAndTxt("MyMexFiles:convertGrid:notDouble", 
+    //                         "Input grid values must be type double.");
+    // }
     
-    if(!mxIsDouble(prhs[1]) || mxIsComplex(prhs[1])) {
-        mexErrMsgIdAndTxt("MyMexFiles:convertGrid:notDouble", 
-                            "Input grid dimension must be type double.");
-    }
+    // if(!mxIsDouble(prhs[1]) || mxIsComplex(prhs[1])) {
+    //     mexErrMsgIdAndTxt("MyMexFiles:convertGrid:notDouble", 
+    //                         "Input grid dimension must be type double.");
+    // }
         
-    if(!mxIsDouble(prhs[2]) || mxIsComplex(prhs[2])) {
-        mexErrMsgIdAndTxt("MyMexFiles:convertGrid:notDouble", 
-                            "Input grid origin must be type double.");
-    }
+    // if(!mxIsDouble(prhs[2]) || mxIsComplex(prhs[2])) {
+    //     mexErrMsgIdAndTxt("MyMexFiles:convertGrid:notDouble", 
+    //                         "Input grid origin must be type double.");
+    // }
     
-    if ( mxIsChar(prhs[3]) != 1) {
-        mexErrMsgIdAndTxt( "MATLAB:convertGrid:inputNotString",
-                            "Input labels file must be a string.");
-    }
+    // if ( mxIsChar(prhs[3]) != 1) {
+    //     mexErrMsgIdAndTxt( "MATLAB:convertGrid:inputNotString",
+    //                         "Input labels file must be a string.");
+    // }
 
-    if ( mxIsChar(prhs[4]) != 1) {
-        mexErrMsgIdAndTxt( "MATLAB:convertGrid:inputNotString",
-                            "OutputFolder nane must be a string.");
-    }
+    // if ( mxIsChar(prhs[4]) != 1) {
+    //     mexErrMsgIdAndTxt( "MATLAB:convertGrid:inputNotString",
+    //                         "OutputFolder nane must be a string.");
+    // }
 
     
-    /* Check if input are row vectors */
-    if(mxGetM(prhs[0]) != 1) {
-        mexErrMsgIdAndTxt("MyMexFiles:convertGrid:notRowVector", 
-                            "Input grid values must be row vector.");
-    }
+    // /* Check if input are row vectors */
+    // if(mxGetM(prhs[0]) != 1) {
+    //     mexErrMsgIdAndTxt("MyMexFiles:convertGrid:notRowVector", 
+    //                         "Input grid values must be row vector.");
+    // }
     
-    if(mxGetM(prhs[1]) != 1 || mxGetN(prhs[1]) != 4) {
-        mexErrMsgIdAndTxt("MyMexFiles:convertGrid:notRowVector", 
-                            "Input grid dimension must be row vector of size 4.");
-    }
+    // if(mxGetM(prhs[1]) != 1 || mxGetN(prhs[1]) != 4) {
+    //     mexErrMsgIdAndTxt("MyMexFiles:convertGrid:notRowVector", 
+    //                         "Input grid dimension must be row vector of size 4.");
+    // }
     
-    if(mxGetM(prhs[2]) != 1 || mxGetN(prhs[2]) != 3) {
-        mexErrMsgIdAndTxt("MyMexFiles:convertGrid:notRowVector", 
-                            "Input grid origin must be row vector of size 3.");
-    }
+    // if(mxGetM(prhs[2]) != 1 || mxGetN(prhs[2]) != 3) {
+    //     mexErrMsgIdAndTxt("MyMexFiles:convertGrid:notRowVector", 
+    //                         "Input grid origin must be row vector of size 3.");
+    // }
     
     /** CORE FUNCTION **/
     /* Read the input data */
-    double *gridValues  = mxGetPr(prhs[0]);
-    double *gridSize    = mxGetPr(prhs[1]);
-    double *gridOrig    = mxGetPr(prhs[2]);
+    double *catValues   = mxGetPr(prhs[0]);
+    double *instValues  = mxGetPr(prhs[1]);
+    double *gridSize    = mxGetPr(prhs[2]);
+    double *gridOrig    = mxGetPr(prhs[3]);
     
     int numClasses = gridSize[0];
     int xRes = gridSize[1];
@@ -99,13 +100,14 @@ void mexFunction(int nlhs, mxArray *plhs[],
     int zRes = gridSize[3];
     
     char *labelFile;
-    labelFile = mxArrayToString(prhs[3]);
+    labelFile = mxArrayToString(prhs[4]);
     
     char *outputFolder;
-    outputFolder = mxArrayToString(prhs[4]);
+    outputFolder = mxArrayToString(prhs[5]);
     
     /* Create a MultiClassGrid */
-    D3D::Grid<int> gtGrid(xRes, yRes, zRes, 0.0f);
+    // D3D::Grid<int> gtGrid(xRes, yRes, zRes, 0.0f);
+    MultiClassGrid<int> gtMCGrid(2, xRes, yRes, zRes, 0.0f);
     
     for(int z = 0 ; z < zRes ; ++z){
         int idx_z = z*xRes*yRes;
@@ -116,9 +118,11 @@ void mexFunction(int nlhs, mxArray *plhs[],
             for(int x = 0 ; x < xRes ; ++x){
                 int idx_xyz = x + idx_yz;
                 
-                int c = gridValues[idx_xyz];
+                int c = catValues[idx_xyz];
+                int inst = instValues[idx_xyz];
                 
-                gtGrid(x, y, z) = c;
+                gtMCGrid(0, x, y, z) = c;
+                gtMCGrid(1, x, y, z) = inst;
                 
             }
         }
@@ -128,7 +132,7 @@ void mexFunction(int nlhs, mxArray *plhs[],
     std::stringstream gtDatFile; // Name of the complete 3D model
     gtDatFile << outputFolder << "/GroundTruth.dat";
     
-    gtGrid.saveAsDataFile(gtDatFile.str().c_str());
+    gtMCGrid.saveAsDataFile(gtDatFile.str().c_str());
     
     /* Create a 3d mesh for visualization */
     label empty_label = {"sky", 0, 0, 0};
@@ -159,7 +163,6 @@ void mexFunction(int nlhs, mxArray *plhs[],
         newLabel.b = val;
 
         labels[labelIdx] = newLabel;
-        cout << labelName << endl;
         ++labelIdx;
     }
 
@@ -190,7 +193,7 @@ void mexFunction(int nlhs, mxArray *plhs[],
             for (int y = 0; y < yRes; y++)
                 for (int x = 0; x < xRes; x++)
                 {
-                    if(gtGrid(x, y, z) == i)
+                    if(gtMCGrid(0, x, y, z) == i)
                     {
                         float voxelValue = 1.0f;
                         tempGrid(x, y, z) += voxelValue; //groundTruth_sub(i,x+1,y+1,z+1);
