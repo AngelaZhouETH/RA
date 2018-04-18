@@ -6,7 +6,7 @@
  # -s shuffle scene order
  # -d discard small rooms
  # -g GPU mode
-
+ # -t generate instance labeling
 
  #!/bin/bash
 	clear
@@ -22,7 +22,7 @@
 	SHUFFLE="false"
 	DISCARD="false"
 	GPU="false"
-	
+	INSTANCE="false"
 
 	# Parse args and assign values
 	POSITIONAL=()
@@ -46,7 +46,7 @@
 	    shift # past argument
 	    shift # past value
 	    ;;
-    	    -o|--outpath)
+        -o|--outpath)
 	    OUTPATH="'$2/'"
 	    shift # past argument
 	    shift # past value
@@ -67,7 +67,11 @@
 	    GPU="true"
 	    shift # past argument
 	    ;;
-	    --default)
+        -t|--instance)
+        INSTANCE="true"
+        shift # past argument
+        ;;
+        --default)
 	    DEFAULT=YES
 	    shift # past argument
 	    ;;
@@ -88,12 +92,13 @@
 	echo "OBJECT CACHE		= ${HASH}"
 	echo "DISCARD SMALL ROOMS	= ${DISCARD}"
 	echo "GPU MODE		= ${GPU}"
+    echo "INSTANCE LABELING       = ${INSTANCE}"
 	echo -e "\n"
 
 	cd ${TOOLBOXPATH}/ReadSemanticGroundTruth
 	/bin/sleep 3
 
 	# Run matlab in command line mode using the input args
-	matlab -nodisplay -nodesktop -r "clear;totalRooms = ${ROOMS};suffle = ${SHUFFLE};rawDataPath = ${INPATH};outputdir = ${OUTPATH};readMap = ${HASH}; discard = ${DISCARD};voxUnit = ${GRANULARITY};enabledGPU =  ${GPU};readAndConvertSUNCG;clear;exit();"
+	matlab -nodisplay -nodesktop -r "clear;totalRooms = ${ROOMS};suffle = ${SHUFFLE};rawDataPath = ${INPATH};outputdir = ${OUTPATH};readMap = ${HASH}; discard = ${DISCARD};voxUnit = ${GRANULARITY};enabledGPU =  ${GPU};withInstance =  ${INSTANCE};readAndConvertSUNCG;clear;exit();"
 
 

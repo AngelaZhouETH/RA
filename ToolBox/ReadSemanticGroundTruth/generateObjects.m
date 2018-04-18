@@ -4,7 +4,7 @@
 % Applies segmentation on grid points of object
 % Updates the label grid  
 
-function [ gridCatLabel, gridInstLabel ] = generateObjects(objcategory, nodes, room, suncgDataPath, voxUnit, gridPtsWorld, gridCatLabel, gridInstLabel, objectMap, scaleMap, minObjs, capacity, wallID, enabledGPU, classInstCount)
+function [ gridCatLabel, gridInstLabel ] = generateObjects(objcategory, nodes, room, suncgDataPath, voxUnit, gridPtsWorld, gridCatLabel, gridInstLabel, objectMap, scaleMap, minObjs, capacity, wallID, enabledGPU, classInstCount, withInstance)
 
     % If there are objects in room
     if isfield(room, 'nodeIndices')
@@ -55,7 +55,9 @@ function [ gridCatLabel, gridInstLabel ] = generateObjects(objcategory, nodes, r
                 if (classRootId == 4 || classRootId == 5)
                    gridPtsObjClearInd = gridPtsObjWorldInd & gridCatLabel==wallID;
                    gridCatLabel(gridPtsObjClearInd) = 0;
-                   gridInstLabel(gridPtsObjClearInd) = 0;
+                   if withInstance
+                        gridInstLabel(gridPtsObjClearInd) = 0;
+                   end
                 end
 
 
@@ -71,11 +73,10 @@ function [ gridCatLabel, gridInstLabel ] = generateObjects(objcategory, nodes, r
                 objOccInd = sqrt(dists) <= sqrt(3)/2*scale;
                 gridPtsObjWorldLinearIdx = find(gridPtsObjWorldInd);
                 gridCatLabel(gridPtsObjWorldLinearIdx(objOccInd)) = classRootId;
-                classInstCount(classRootId) = classInstCount(classRootId) + 1;
-                gridInstLabel(gridPtsObjWorldLinearIdx(objOccInd)) = classInstCount(classRootId);
-
-                classRootId
-                classInstCount(classRootId)
+                if withInstance
+                    classInstCount(classRootId) = classInstCount(classRootId) + 1;
+                    gridInstLabel(gridPtsObjWorldLinearIdx(objOccInd)) = classInstCount(classRootId);
+                end
             end
         end
 

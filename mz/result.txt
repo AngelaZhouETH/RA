@@ -1,0 +1,186 @@
+all_room_hasviews: 23
+at_least_room_view: 79
+no_room_in_scene: 8
+no_camera_in_scene: 139
+empty_cam_in_scene: 20
+no_view_in_allrooms: 167
+scene_num: 246
+
+room_hasview: 170
+no_camera_in_room: 380
+empty_camera_in_room: 179
+no_view_in_room: 559
+room_num: 729
+
+
+
+no camera in scene: 000514ade3bcc292a613a4c2755a5050
+no camera in scene: 0005b50577f5871e1c0bb7a687f6cbc3
+all rooms empty camera: 0017aeff679f53cd65edf72ef2349ff1
+all rooms empty camera: 0017b414c92137d87625f0b35967e19b
+no camera in scene: 001e3c88f922f42b5a3f546def6eb83f
+all rooms empty camera: 001ef7e63573bd8fecf933f10fa4491b
+no camera in scene: 0022e45e7eac05c04c46843578ff6708
+no camera in scene: 00242d88a5d64d909736fd8ab4f8d69e
+no camera in scene: 002cd517b31096e124d9697ef665dce1
+no camera in scene: 003afc0c64f2da46c46a4f4660cd5cb1
+all rooms empty camera: 003cf0cdb02443370b659820667ead7e
+no camera in scene: 004c56a12a7989d45266bf05ca5b5787
+all rooms empty camera: 005832b429dc4675170cd9686f978349
+no camera in scene: 005f01c04f143ceafd0e935860913633
+no camera in scene: 005f0859081006be329802f967623015
+all rooms empty camera: 006442794ad11eacab5b994920158cb9
+no camera in scene: 00674ddf2644455cb0f3d28dc84c1ffe
+all rooms empty camera: 0067620211b8e6459ff24ebe0780a21c
+all rooms empty camera: 00693390e88a82ce7a4bccfc9f3626ac
+all rooms empty camera: 007160316845c9049046fd8b0786f9a9
+all rooms empty camera: 007ef00705876c916ab8b7bfc15292f1
+all rooms empty camera: 007fdc5919af62048afb0bf551cf0d54
+all rooms empty camera: 0084f224906ce08747752ffe7c039afb
+all rooms empty camera: 008969b6e13d18db3abc9d954cebe6a5
+all rooms empty camera: 008d3eb9243f9c55440de16a7c1a94c1
+no room in scene: 009da17ff8871e4e1e518c785c75dd28
+all rooms empty camera: 009e7f8c3114990c9ecb2e1c59ffe0b7
+all rooms empty camera: 00a4278f55642b43303183da6f2751ba
+all rooms empty camera: 00afed09a913d9ceefa3efae9cfb7dee
+all rooms empty camera: 00b302c098f18ede3836e6f310fdb843
+all rooms empty camera: 00b5595cb900834042b4a2d47ee0252c
+all rooms empty camera: 00b7476991a1e226d5f3b2c54abef09b
+no camera in scene: 00ba0ce9448d0ce1b60aa6c50b875bee
+no camera in scene: 00c23d6ab79115847e2d3062737d22d0
+no camera in scene: 00c2cda6d035b89613f3d2bf3071af90
+no camera in scene: 00c6c138c32f4cb08817eb8b4f0f3769
+no camera in scene: 00cdcd4541a2145d004bbd45ee658f66
+no camera in scene: 00ced72d2a6300caa71e814c81bd9cda
+no camera in scene: 00cfe094634578865b4384f3adef49e6
+no camera in scene: 00d0a6f041e710f2a198557cbad92e19
+no camera in scene: 00d1eea75bb4e7ccdd05b29d7a9ac7cd
+no camera in scene: 00d2540109c93374926dcc345e998b56
+no camera in scene: 00d27dff98410b7a68e6c146c6e5f536
+no camera in scene: 00d57cd4450896c314a4c711aed411e1
+no camera in scene: 00d92cc9072fe4173a1e7778bbca118c
+no camera in scene: 00d9ae13d709e04cf29863b2a481a9d0
+no camera in scene: 00d9be7210856e638fa3b1addf2237d6
+no room in scene: 00e030e0e9198a0f9dd5389f2d2e9271
+no camera in scene: 00e1559bdd1539323f3efba225af0531
+no camera in scene: 00e31450c5888b7efb8d02ecf1cb01a2
+no camera in scene: 00e5c440aec4697a73cc510018ff0825
+no camera in scene: 00ea8026821d6e9e1854eb75b68452ef
+no camera in scene: 00edb7bacc2c707b7f00e0f0d2ba2aef
+no camera in scene: 00f35da26ade0c2e8647546b9e22cade
+no camera in scene: 00f55236d7ce1a3dfae9cc5da2054703
+no camera in scene: 00f7ace154d570fbc60d7ed398aa8dbd
+no camera in scene: 00f8342b554ffc40aab57b5e65fe8e92
+no camera in scene: 00f87ab31b02f20178b7057018c9061c
+no camera in scene: 00fc2d5a0935b3c51a55189e695e8169
+no camera in scene: 01003d58d5d927cfa79cf596e87295ef
+no camera in scene: 01014942a89d1f39767cb3c186e0891e
+no camera in scene: 0108996080ac89b4e476dc88e5768fad
+no camera in scene: 0108b6baf430602dc5d96da68ddb4d58
+no camera in scene: 010909a4dfe6950a6a6d7dc1e13550ef
+no camera in scene: 01092376b49403629a78609a148be569
+no camera in scene: 0109fd97ca1f0002d476d07a708b8917
+no camera in scene: 010a80bc554638b09a1aa9d7fe684aee
+no camera in scene: 010e294b8cc56aa73b24f8ab0dd4f560
+no camera in scene: 0114a23a28a7df6b54d0ff628bf3e770
+no camera in scene: 011c6c375990aab47deaa5ee5e4409cf
+no camera in scene: 011f570d914de40b82bd32aef595cee2
+no camera in scene: 01261854bb1ff3f7e5a59506ca5798e4
+no camera in scene: 0128667499bc73c869df6b20a2d4fe26
+no camera in scene: 0128ad620c6b97c1f0448b6227b52c99
+no camera in scene: 012a74000925a28e4510eb7dd25dd12f
+no camera in scene: 012cb504e22ad35f29ff0fb822d703c5
+no camera in scene: 012d910b14978390396640e989588c54
+no camera in scene: 012dcbf6d499e1a2f6603d4f773ff7c7
+no camera in scene: 012dfd5217aa7c61ae0dde5db2c44c0c
+no camera in scene: 013270b18646bb5827deb3942b09a3a6
+no camera in scene: 013365aedf1f2a74e61ef1f23c1764f2
+no camera in scene: 01338c4cf31f8bcf3df77e4308e88080
+no camera in scene: 0134748166d15e65324126a5fd02e8e4
+no camera in scene: 0137913f31d77c584ced8a558da40a07
+no camera in scene: 0138ea33414267375b879ff7ccc1436c
+no camera in scene: 01399b966564a5e7c4a9cfaf2af02c73
+no camera in scene: 013ac3ff83ff3e81e2aa5326848e5b22
+no camera in scene: 013c09b1e928e32e22a54bc8713f84ad
+no camera in scene: 013dd91ea89deab112fb99544255c1af
+no camera in scene: 014055e4cc597e59c0515dd92acd3afb
+no camera in scene: 0140b5e97549a80853810d2e94922ff4
+no camera in scene: 0147a1cce83b6089e395038bb57673e3
+no camera in scene: 014a4640cc3f08b88b3b201d081dbc80
+no camera in scene: 014a8d847bab584038505c0e5a1bfa65
+no camera in scene: 014d4489d6a284ad8db13710a9fa3c9e
+no camera in scene: 014d4eb144276041957e3b7021671981
+no camera in scene: 01503046d91c5912950da9b2ec26fa6c
+no camera in scene: 0151bda64bf7e7f0294b00ff27f61d20
+no camera in scene: 01550c6a497c09ade81f591fa46cc2c5
+no camera in scene: 015b570caa6be4842606149475e6dc36
+no camera in scene: 015d0e1cebc9475b8edb17b00b523f83
+no camera in scene: 0161a4ab2e4fa6aa12dab13c170c2fd6
+no camera in scene: 0164c0e436fbb0fdcfc1a89c9ed241a1
+no room in scene: 01665bbca9dfa7cf8be36fbb37c3873d
+no camera in scene: 016c553bed94171d40cb41c06770b3c7
+no camera in scene: 016ce68e51efd8faa246865837c82e35
+no camera in scene: 016d58204815cd6a6ee26a5e9d6610de
+no camera in scene: 016f0f798934c1ada1a5a2c5c860b136
+no camera in scene: 016f6d20a99cac200a94ebed48105ab5
+no camera in scene: 017348b4882edddf4c3329e7c257b816
+no camera in scene: 0173543a6c15604c28070aafa61868be
+no camera in scene: 01738c1e15e6ee2b8b9692c9bdbd3bd5
+no camera in scene: 01749bbee28a0a3823ac9658e40843bf
+no camera in scene: 017dd67c70318e4a4e7edbe520b5cadd
+no room in scene: 017e5866bb6c8e009ebb3b7ef2641f56
+no camera in scene: 018b14225a91520ef697eaee99b94ecb
+no camera in scene: 018e8c188b02d11f25ac606aed96b2a0
+no camera in scene: 018eed3f2e8acfbb8e20e58b15c3d5b2
+no camera in scene: 01941290d5a35ca4b8447d1eed3db47e
+no camera in scene: 019ad088de5e92c6a331af359ed101e8
+no camera in scene: 019bbb706b85f58f7f3cdb63cb3f554f
+no camera in scene: 01a00a54b07c67729af0c4f5bdb91ccf
+no camera in scene: 01a5f295c34f15b970c17acb18b6bdd3
+no camera in scene: 01a6c732a04df6a65965a82320c392e2
+no camera in scene: 01a7e37f754e011bf742ef22b6da4307
+no camera in scene: 01aa1a8b29c37dd469abd43133a500e5
+no camera in scene: 01add1c5ab0a7c1a0935578cf599381d
+no camera in scene: 01ae1be84c025cbf1ff399777dcee7eb
+no camera in scene: 01ae6556a36487d2e3a4884a10270647
+no camera in scene: 01b05d5581c18177f6e8444097d89db4
+no camera in scene: 01b09ccb278c53a2e6fe155a61c09249
+no camera in scene: 01b1f23268db0f2801f4685a7e1563b9
+no camera in scene: 01b4fc708b2676dbe389d5f834be2c08
+no camera in scene: 01b5ffd7a7e9ce0ea36528edd1a4ce3f
+no camera in scene: 01b8fe9faef3a608714e93be9dc9fac1
+no camera in scene: 01baaab21bf80b9d7cfa53b9f94d6372
+no camera in scene: 01bc4f8cdc1fe117d4811ed0812c8145
+no camera in scene: 01bce04f919839e37228bc7e64b80b43
+no camera in scene: 01bd29b1cfff65af03def1effa63babf
+no camera in scene: 01bea140c4a7fe58b9eda35f3b4afff1
+no camera in scene: 01c1591dd04a3f450b6e30cae2ae1ac2
+no room in scene: 01d12801b4bc701487cf3f93b2eeadbb
+no camera in scene: 01d242d998876aee8ac66592edbd9d38
+no camera in scene: 01d356d8f15588cc2ab3a61823ee0099
+no camera in scene: 01d4be86806197794c9333540d5bf77c
+no camera in scene: 01d592e5fa117c78be67392b6af94dbe
+no camera in scene: 01d6484ac495a001f59f68b2b1016ee1
+no room in scene: 01d7047ca5444a571fec01a283e88be8
+no room in scene: 01dfbd627fee84af2211f50d5a0beba0
+no camera in scene: 01e26ee1fcb5b888b7f8966db085831f
+no camera in scene: 01e284c8fa1a198995c5a074430bf655
+no camera in scene: 01e49f13d6c149e0f3099c3a4312c938
+no camera in scene: 01e53c5618fd8d4d78c916b9dcc4ff92
+no camera in scene: 01ef1f8e3b348ea9de3ef874e66edcf4
+no camera in scene: 01f8b2da9b1118365475e1e2450ca24c
+no camera in scene: 01fa2efaea18372e4aa92e3719c9cdcd
+no camera in scene: 01ff7e5418f0c4f721130313cf41b338
+no camera in scene: 0200cdd254a506c3df5f8c5871ce8427
+no camera in scene: 0206481b18a7866c0f4b3f5c885f4549
+no camera in scene: 02065e3a3598be3ec1e68bd2c93dd9a0
+no camera in scene: 02096d060ce955a7b3711b49a51f99f4
+no camera in scene: 020a2b14e3cb74851145ed579c10fa53
+no camera in scene: 020b3a53af5a86c4e4099ae7d2cfd003
+no camera in scene: 020fd281350892fef1663e5df4ac94f9
+no camera in scene: 021005e8e70f13c240064f3a0b809643
+no room in scene: 0210ae43ee2abd98c4ea840fba98feb4
+no camera in scene: 0211ed6f9e67c38367fbd47a480627a1
+
+
+

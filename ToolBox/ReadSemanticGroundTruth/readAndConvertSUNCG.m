@@ -21,7 +21,7 @@ load(fullfile(suncgToolboxPath, 'suncgObjcategory.mat'));
 % Compile C++
 % mex -I"../Eigen/eigen" -outdir ToolBox/MyMexFiles -c ToolBox/MyMexFiles/ioTools.cpp
 % mex -I"../Eigen/eigen" -I"/usr/local/opt/boost/include/" -I"/opt/X11/include/" -outdir ToolBox/MyMexFiles -c ToolBox/MyMexFiles/volumetricFusionTools.cpp
-mex -I"../Eigen/eigen" -I"/usr/local/opt/boost/include/" -L"/usr/X11/lib/" -lpthread -lX11 ToolBox/MyMexFiles/ioTools.o ToolBox/MyMexFiles/volumetricFusionTools.o ToolBox/MyMexFiles/convertGrid.cpp
+% mex -I"../Eigen/eigen" -I"/usr/local/opt/boost/include/" -L"/usr/X11/lib/" -lpthread -lX11 ToolBox/MyMexFiles/ioTools.o ToolBox/MyMexFiles/volumetricFusionTools.o ToolBox/MyMexFiles/convertGrid.cpp
 
 suncgDataPath = rawDataPath;
 
@@ -139,7 +139,7 @@ for sceneIdx = 1:numScenes
                     %% Create a voxel grid
                     fprintf('Creating voxel grid\n');
                     [gridPtsWorldX, gridPtsWorldY, gridPtsWorldZ, gridPtsWorld, gridCatLabel, gridInstLabel, inRoom] = ... 
-                        constructGrid(voxOriginWorld, voxUnit, voxSize);
+                        constructGrid(voxOriginWorld, voxUnit, voxSize, withInstance);
                     classInstCount = zeros(1, numClasses-1);
 
                 else
@@ -165,44 +165,41 @@ for sceneIdx = 1:numScenes
 
                 %% Ceiling grid in the room
 
-                fprintf('Reading ceiling\n');
+                fprintf('\nReading ceiling\n');
                 [gridCatLabel, gridInstLabel] = generateCeilingFloor( ...
                                 ceilPath, ceilID, size(inRoom), voxUnit, ...
                                 voxOriginWorld, gridPtsWorld, ...
                                 gridPtsWorldX, gridPtsWorldZ, ...
-                                gridCatLabel, gridInstLabel ...
+                                gridCatLabel, gridInstLabel, withInstance ...
                                 );
-                classInstCount(ceilID) = 1;
 
                 %% Floor grid in the room
                 % exactly like ceiling part
-                fprintf('Reading floor\n');
+                fprintf('\nReading floor\n');
                 [gridCatLabel, gridInstLabel] = generateCeilingFloor(...
                                 floorPath, floorID, ...
                                 size(inRoom), voxUnit, voxOriginWorld, ...
                                 gridPtsWorld, gridPtsWorldX, gridPtsWorldZ, ...
-                                gridCatLabel, gridInstLabel ...
+                                gridCatLabel, gridInstLabel, withInstance ...
                                 );
-                classInstCount(floorID) = 1;
 
                 %% Walls grid in the room
                 % exactly like ceiling part
-                fprintf('Reading walls\n');
+                fprintf('\nReading walls\n');
                 [gridCatLabel, gridInstLabel]  = generateWalls( ...
                                 wallPath, wallID, size(inRoom), voxUnit, ...
                                 voxOriginWorld, gridPtsWorld, ...
                                 gridPtsWorldX, gridPtsWorldZ, ...
-                                gridCatLabel, gridInstLabel ...
+                                gridCatLabel, gridInstLabel, withInstance ...
                                 );
-                classInstCount(wallID) = 1;
 
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%
                 times(roomCounter,2) = toc;
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
                 %% Object Read;
-                fprintf('Reading objects');
-                [gridCatLabel, gridInstLabel] = generateObjects(objcategory, nodes, room, suncgDataPath, voxUnit, gridPtsWorld, gridCatLabel, gridInstLabel, objectMap, scaleMap, minObjs, capacity, wallID, enabledGPU, classInstCount);
+                fprintf('\nReading objects');
+                [gridCatLabel, gridInstLabel] = generateObjects(objcategory, nodes, room, suncgDataPath, voxUnit, gridPtsWorld, gridCatLabel, gridInstLabel, objectMap, scaleMap, minObjs, capacity, wallID, enabledGPU, classInstCount, withInstance);
 
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%
                 times(roomCounter,3) = toc;
@@ -221,7 +218,7 @@ for sceneIdx = 1:numScenes
                 end
 
                 % Create reconstruction files
-                convertGrid(gridCatLabel, gridInstLabel, [numClasses, gridSize], sceneOrigin, 'labels.txt', resultFolder);
+                convertGrid(withInstance, gridCatLabel, gridInstLabel, [numClasses, gridSize], sceneOrigin, 'labels.txt', resultFolder);
 
                 % Save configuration (in case)
                 configfile = fullfile(outputFolder, sceneID, 'config.mat');
@@ -231,7 +228,8 @@ for sceneIdx = 1:numScenes
                                  'discard', ...
                                  'voxUnit', ...
                                  'enabledGPU', ...
-                                 'suffle' ...
+                                 'suffle', ...
+                                 'withInstance' ...
                  );
 
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%

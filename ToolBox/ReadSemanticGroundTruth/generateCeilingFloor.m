@@ -1,6 +1,6 @@
 % Reads and reconstructs the floor ot the ceiling of a room
 
-function [ gridCatLabel, gridInstLabel ] = generateCeilingFloor( path, id, sizeR, voxUnit, voxOriginWorld, gridPtsWorld, gridPtsWorldX, gridPtsWorldZ, gridCatLabel, gridInstLabel)
+function [ gridCatLabel, gridInstLabel ] = generateCeilingFloor( path, id, sizeR, voxUnit, voxOriginWorld, gridPtsWorld, gridPtsWorldX, gridPtsWorldZ, gridCatLabel, gridInstLabel, withInstance)
 
 
     if(exist(path))
@@ -28,7 +28,9 @@ function [ gridCatLabel, gridInstLabel ] = generateCeilingFloor( path, id, sizeR
         gridPtsObjWorldInd = inRoom(:)' & (abs(gridPtsWorld(2,:)-voxOriginWorld(2)-posZ) <= 2*voxUnit/2);
         % label all the ceiling points in the scene
         gridCatLabel(gridPtsObjWorldInd) = id;
-        gridInstLabel(gridPtsObjWorldInd) = 1;
+        if withInstance
+            gridInstLabel(gridPtsObjWorldInd) = 1;
+        end
         
     end
 
