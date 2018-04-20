@@ -885,7 +885,7 @@ void Redraw(void)
 
   // Capture and write category image 
   if (capture_category_images) {
-    if (DrawSceneWithOpenGL(*camera, scene, NODE_COLOR_SCHEME)) {
+    if (DrawSceneWithOpenGL(*camera, scene, CATEGORY_COLOR_SCHEME)) {
       image.Clear(0);
       if (CaptureInteger(image)) {
         char output_image_filename[1024];

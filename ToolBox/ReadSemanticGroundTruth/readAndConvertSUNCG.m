@@ -112,7 +112,7 @@ for sceneIdx = 1:numScenes
         % For every room
         for node_idx = 1:length(nodes)
 
-            if strcmp(nodes{node_idx}.type, 'Room')
+            if strcmp(nodes{node_idx}.type, 'Room') && nodes{node_idx}.valid == 1
 
                 %%%%
                 tic;

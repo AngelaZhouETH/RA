@@ -23,6 +23,7 @@ load(fullfile(suncgToolboxPath, 'suncgObjcategory.mat'));
 M_index = csv2cell('class_index.csv','fromfile');
 
 recfiles   = dir(fullfile(reconstructionFolder));
+imagesPerView
 % For all reconstructed scenes
 for i=3:size(recfiles)
     
@@ -54,22 +55,22 @@ for i=3:size(recfiles)
         % for every room in the data scene
         for node_idx = 1:length(nodes)
 
-            if strcmp(nodes{node_idx}.type, 'Room') && nodes{node_idx}.valid == 1
+            if strcmp(nodes{node_idx}.type, 'Room')
+                % room size
                 room = nodes{node_idx};
+                bbox = nodes{node_idx}.bbox;
+                max = bbox.max;
+                min = bbox.min;
+                centerX = (bbox.max(1)- bbox.min(1))/2  + bbox.min(1);
+                centerZ = (bbox.max(3)- bbox.min(3))/2  + bbox.min(3);
+
+                fprintf(sprintf('Reading room %s\n', room.modelId));
+
                 path = fullfile(reconstructionFolder, recfiles(i).name, strcat('room_', room.modelId));
+                disp(path);
 
                 % if this room has been reconstructed
                 if exist(path)
-                    % room size
-                    bbox = nodes{node_idx}.bbox;
-                    max = bbox.max;
-                    min = bbox.min;
-                    centerX = (bbox.max(1)- bbox.min(1))/2  + bbox.min(1);
-                    centerZ = (bbox.max(3)- bbox.min(3))/2  + bbox.min(3);
-
-                    fprintf(sprintf('Reading room %s\n', room.modelId));
-                    disp(path);
-
                     fid=fopen(fullfile(path, 'cameras.txt'), 'w');
                     fclose(fid);
 
