@@ -232,6 +232,16 @@ for sceneIdx = 1:numScenes
                                  'withInstance' ...
                  );
 
+                
+                % Save bbox
+                bbox_matrix = [
+                   bbox.min(1), bbox.max(1) ;
+                   bbox.min(2), bbox.max(2) ;
+                   bbox.min(3), bbox.max(3) ; 
+                ];
+            
+                dlmwrite(fullfile(resultFolder, 'bbox.txt'), bbox_matrix, 'delimiter', ' ');
+                
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%
                 times(roomCounter,4) = toc;
                 %%%%%%%%%%%%%%%%%%%%%%%%%%%
