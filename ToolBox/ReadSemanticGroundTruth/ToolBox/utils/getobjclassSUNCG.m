@@ -8,7 +8,7 @@ function [categoryRoot,classRootId, category,classId,insctancId] = getobjclassSU
                 classId = -1;
             end
             classRootId = length(objcategory.object_hierarchical)+1;
-            categoryRoot = 'dont_care';
+            categoryRoot = 'unknown';
             for i = 1:length(objcategory.object_hierarchical)
                 if ( ismember(category,objcategory.object_hierarchical{i}.clidern))
                     classRootId =i;

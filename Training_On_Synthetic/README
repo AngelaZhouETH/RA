@@ -1,0 +1,29 @@
+Compilations:
+You need to compile the TSDF code. To do so:
+
+cd TSDF
+python setup.py
+
+It uses cython, if you never used it, you can install it using either "pip install cython" or "conda install cython".
+
+#################################################
+Running the code:
+
+1. You first need to convert your matlab and c++ generated files in a format understandable by Python.
+
+python convert --data_path /path/to/data #where /path/to/data contains all your processed scenes
+
+-------
+2. Then you can run the tsdf fusion script, to generate the datacost
+
+sh run_tsdf_fusion.sh # don't forget to change the paths
+
+/!\ the file labels_new_format.txt should always be in the same folder as run_tsdf_fusion.sh
+
+------
+3. Eventually you can run the training code
+
+python3 train_sem3D.py --nepochs 1000 --nclasses 38 --batch_size 4 --epoch_npasses 1 --learning_rate 1.0e-5 --scene_path /Users/zhoumoyuan/Documents/sem4/RA/Data_Test --scene_train_list_path /Users/zhoumoyuan/Documents/sem4/RA/Data_Test --scene_val_list_path /Users/zhoumoyuan/Documents/sem4/RA/Data_Test --model_path /Users/zhoumoyuan/Documents/sem4/RA/Model
+
+
+
