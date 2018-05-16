@@ -92,7 +92,7 @@ def read_groundtruth(room_path, numclasses):
     groundtruth_onehot[np.arange(groundtruth.size), groundtruth] = 1.0
     groundtruth_onehot = np.reshape(groundtruth_onehot, [xres, yres, zres, numclasses])
 
-    return groundtruth
+    return groundtruth_onehot
 
 
 def read_projections(scene_path, width, height):
