@@ -84,12 +84,18 @@ resultFolder = [];
 
 %% Read files
 
-% For all scenes
+% For all scenes which were not read
 for sceneIdx = 1:numScenes
-
+    
     try
         %% Read House file
         sceneID = listScenes(sceneIdx).name;
+        sceneFolder = fullfile(outputFolder, sceneID);
+        configfile = fullfile(outputFolder, sceneID, 'config.mat');
+        if(exist(sceneFolder) && exist(configfile))
+            continue;
+        end
+        
         fprintf('Reading Scene:%s \n\n',sceneID);
         fprintf('Loading house.json\n');
         house  = loadjson(fullfile(suncgDataPath,'house', sceneID,'house.json'));
@@ -219,19 +225,6 @@ for sceneIdx = 1:numScenes
 
                 % Create reconstruction files
                 convertGrid(withInstance, gridCatLabel, gridInstLabel, [numClasses, gridSize], sceneOrigin, 'labels.txt', resultFolder);
-
-                % Save configuration (in case)
-                configfile = fullfile(outputFolder, sceneID, 'config.mat');
-                save(configfile, 'suncgDataPath', ...
-                                 'outputdir', ...
-                                 'readMap', ...
-                                 'discard', ...
-                                 'voxUnit', ...
-                                 'enabledGPU', ...
-                                 'suffle', ...
-                                 'withInstance' ...
-                 );
-
                 
                 % Save bbox
                 bbox_matrix = [
@@ -262,6 +255,18 @@ for sceneIdx = 1:numScenes
             end
         end
 
+        % Save configuration (in case)
+        configfile = fullfile(outputFolder, sceneID, 'config.mat');
+        save(configfile, 'suncgDataPath', ...
+                         'outputdir', ...
+                         'readMap', ...
+                         'discard', ...
+                         'voxUnit', ...
+                         'enabledGPU', ...
+                         'suffle', ...
+                         'withInstance' ...
+         );
+     
         % Break all
         %if roomCounter >= (totalRooms + 1)
         %    break;

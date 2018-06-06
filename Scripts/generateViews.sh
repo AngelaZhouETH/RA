@@ -85,32 +85,32 @@
 	scenes=`ls $reconstruction_dir`
 
 	# for each scene	
-#	for eachfile in $scenes
-#	do
-#	   echo $eachfile
-#		
-#	   if  [[ $eachfile != "timelog.txt" ]] ;
-#	   then
-#			# remove previous views
-#			cd $suncg_dir$eachfile
-#			find . -name "000*.png" -type f -delete
-#			find . -name "000*.jpg" -type f -delete
-#			# find . -name "outputcam*" -type f -delete	
-#
-#			# execute SUNCG tools in order to generate views
-#			cd $suncg_dir$eachfile && ls
-#			pwd
-#			$tools_dir/scn2scn house.json house.obj
-#			$tools_dir/scn2cam house.json outputcamerafile -categories $modelmapping/ModelCategoryMapping.csv -v
-#			if [ $segment_type -eq $INST_ONLY ]; then
-#				$tools_dir/scn2img house.json outputcamerafile ./ -capture_instance_images -capture_color_images -capture_depth_images -capture_kinect_images -v
-#			elif [ $segment_type -eq $CAT_ONLY ]; then
-#				$tools_dir/scn2img house.json outputcamerafile ./ -categories $modelmapping/ModelCategoryMapping.csv -v
-#			else
-#				$tools_dir/scn2img house.json outputcamerafile ./ -capture_instance_images -capture_color_images -capture_depth_images -capture_kinect_images -categories $modelmapping/ModelCategoryMapping.csv -v
-#			fi
-#	   fi
-#	done
+	for eachfile in $scenes
+	do
+	   echo $eachfile
+		
+	   if  [[ $eachfile != "timelog.txt" ]] ;
+	   then
+			# remove previous views
+			cd $suncg_dir$eachfile
+			find . -name "000*.png" -type f -delete
+			find . -name "000*.jpg" -type f -delete
+			# find . -name "outputcam*" -type f -delete	
+
+			# execute SUNCG tools in order to generate views
+			cd $suncg_dir$eachfile && ls
+			pwd
+			$tools_dir/scn2scn house.json house.obj
+			$tools_dir/scn2cam house.json outputcamerafile -categories $modelmapping/ModelCategoryMapping.csv -v
+			if [ $segment_type -eq $INST_ONLY ]; then
+				$tools_dir/scn2img house.json outputcamerafile ./ -capture_instance_images -capture_color_images -capture_depth_images -capture_kinect_images -v
+			elif [ $segment_type -eq $CAT_ONLY ]; then
+				$tools_dir/scn2img house.json outputcamerafile ./ -categories $modelmapping/ModelCategoryMapping.csv -v
+			else
+				$tools_dir/scn2img house.json outputcamerafile ./ -capture_instance_images -capture_color_images -capture_depth_images -capture_kinect_images -categories $modelmapping/ModelCategoryMapping.csv -v
+			fi
+	   fi
+	done
 
 	# Transfer views in the proper folder
 	cd ${toolbox}/ReadSemanticGroundTruth
